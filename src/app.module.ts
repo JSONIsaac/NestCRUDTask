@@ -12,7 +12,7 @@ import { TasksModule } from './tasks/tasks.module';
       password: '',
       database: 'nest_intro',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true,
+      synchronize: false,
     }),
     TasksModule,
   ],
