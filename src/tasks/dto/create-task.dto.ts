@@ -8,7 +8,7 @@ export class CreateTaskDto {
 
     @IsOptional()
     @IsString()
-    description?: string;
+    descripcion?: string;
 
     @IsOptional()
     @IsBoolean()

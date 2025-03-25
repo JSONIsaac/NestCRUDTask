@@ -1,38 +1,45 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, ParseIntPipe, UseGuards, Request, UseInterceptors } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { Task } from './entities/task.entity';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { TimingInterceptor } from 'src/ommon/interceptors/timing.interceptor';
 
 @Controller('tasks')
+@UseInterceptors(TimingInterceptor)
 export class TasksController {
-    constructor(private readonly taskService: TasksService){}
-    
-    @Get()
-    findAll(): Promise<Task[]> {
-        return this.taskService.findAll();
-    }
+  constructor(private readonly tasksService: TasksService) {}
 
-    @Get(':id')
-    findOne(@Param('id', ParseIntPipe) id: number): Promise<Task> {
-        return this.taskService.findOne(id);
-    }
+  @Get()
+  findAll(): Promise<Task[]> {
+    return this.tasksService.findAll();
+  }
 
-    @Post()
-    cretae(@Body() createTaskDto: CreateTaskDto): Promise<Task>{
-        return this.taskService.create(createTaskDto);
-    }
+  @Get(':id')
+  findOne(@Param('id', ParseIntPipe) id: number): Promise<Task> {
+    return this.tasksService.findOne(id);
+  }
 
-    @Put(':id')
-    update(
-        @Param('id', ParseIntPipe) id: number,
-        @Body() updateTaskDto: UpdateTaskDto,
-    ): Promise<Task> {
-        return this.taskService.update(id, updateTaskDto);
-    }
+  @UseGuards(JwtAuthGuard)
+  @Post()
+  create(@Body() createTaskDto: CreateTaskDto, @Request() req): Promise<Task> {
+    return this.tasksService.create(createTaskDto, req.user.userId);
+  }
 
-    @Delete(':id')
-    remove(@Param('id', ParseIntPipe) id: number): Promise<{ message: string }> {
-        return this.taskService.remove(id);
-    }
+  @UseGuards(JwtAuthGuard)
+  @Put(':id')
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateTaskDto: UpdateTaskDto,
+    @Request() req,
+  ): Promise<Task> {
+    return this.tasksService.update(id, updateTaskDto, req.user.userId);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete(':id')
+  remove(@Param('id', ParseIntPipe) id: number, @Request() req): Promise<{message: string}> {
+    return this.tasksService.remove(id, req.user.userId);
+  }
 }

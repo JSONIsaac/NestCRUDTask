@@ -1,3 +1,16 @@
+# Configuración de Autenticación con JWT en NestJS
+
+## 1. Instalar dependencias necesarias
+
+```bash
+yarn add class-transformer
+yarn add @nestjs/jwt @nestjs/passport passport passport-jwt passport-local bcrypt
+yarn add -D @types/passport-jwt @types/passport-local @types/bcrypt
+yarn add @nestjs/throttler
+```
+
+
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>

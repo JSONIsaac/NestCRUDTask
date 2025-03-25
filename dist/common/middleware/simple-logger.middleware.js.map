@@ -1,0 +1,1 @@
+{"version":3,"file":"simple-logger.middleware.js","sourceRoot":"","sources":["../../../src/common/middleware/simple-logger.middleware.ts"],"names":[],"mappings":";;AAEA,oCAGC;AAHD,SAAgB,YAAY,CAAC,GAAY,EAAE,GAAa,EAAE,IAAkB;IAC1E,OAAO,CAAC,GAAG,CAAC,IAAI,IAAI,IAAI,EAAE,CAAC,WAAW,EAAE,KAAK,GAAG,CAAC,MAAM,IAAI,GAAG,CAAC,GAAG,EAAE,CAAC,CAAC;IACtE,IAAI,EAAE,CAAC;AACT,CAAC"}

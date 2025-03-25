@@ -1,20 +1,24 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
-
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { User } from '../../users/entities/user.entity';
 
 @Entity('tasks')
 export class Task {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    title: string;
+  @Column({ length: 100 })
+  title: string;
 
-    @Column()
-    description: string;
+  @Column({ type: 'text', nullable: true })
+  descripcion: string;
 
-    @Column()
-    isCompleted: boolean;
+  @Column({ name: 'is_completed', default: false })
+  isCompleted: boolean;
 
-    @CreateDateColumn()
-    createdAd: Date;
+  @CreateDateColumn({ name: 'create_at' })
+  createdAt: Date;
+
+  @ManyToOne(() => User, user => user.tasks, { nullable: true })
+  @JoinColumn({ name: 'user_id' })
+  user: User;
 }

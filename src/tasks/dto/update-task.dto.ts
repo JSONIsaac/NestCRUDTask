@@ -8,7 +8,7 @@ export class UpdateTaskDto{
 
     @IsOptional()
     @IsString()
-    description?: string;
+    descripcion?: string;
 
     @IsOptional()
     @IsString()
