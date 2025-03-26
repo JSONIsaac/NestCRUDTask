@@ -10,7 +10,7 @@ import { TasksModule } from './tasks/tasks.module';
       port: 3306,
       username: 'root',
       password: '',
-      database: 'nest_intro',
+      database: 'nestjwt',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: false,
     }),

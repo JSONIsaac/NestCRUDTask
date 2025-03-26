@@ -10,11 +10,11 @@ export class Task {
     title: string;
 
     @Column()
-    description: string;
+    descripcion: string;
 
-    @Column()
+    @Column({name: 'is_completed'})
     isCompleted: boolean;
 
-    @CreateDateColumn()
+    @CreateDateColumn({name: 'create_at'})
     createdAd: Date;
 }
